@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widget/inventory_card.dart';
+import 'stock_management.dart';
 import 'test_page.dart';
 
 class HomePage extends StatelessWidget {
@@ -30,7 +31,8 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TestPage()),
+                  MaterialPageRoute(
+                      builder: (context) => StockManagementPage()),
                 );
               },
             ),
