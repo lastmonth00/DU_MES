@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widget/inventory_card.dart';
-import 'stock_management.dart';
+import 'stock_management_page.dart';
 import 'test_page.dart';
 
 class HomePage extends StatelessWidget {
