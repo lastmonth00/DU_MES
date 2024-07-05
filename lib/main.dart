@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'pages/home_page.dart';
+
 Map<String, Object?> castMap(Map<String, dynamic> data) {
   Map<String, Object?> rtn = {};
   data.forEach((key, value) => rtn[key] = value);
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      //   home: HomePage(),
+      home: HomePage(),
     );
   }
 }
