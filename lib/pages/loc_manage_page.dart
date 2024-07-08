@@ -23,7 +23,7 @@ class _LocManagementPageState extends State<LocManagementPage> {
     dic['A_PART_NO'] = '';
     dic['A_STK_ID'] = 'TEST1';
     ReturnData result =
-        await WcfController.postHttp('DBM1.GET_STK_STATUS', 1, dic);
+        await WcfController.postHttp('DBM2.GET_STK_STATUS', 1, dic);
     return result;
   }
 
@@ -63,8 +63,8 @@ class DataDisplay extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('ReturnInt: ${data.returnInt}'),
-        Text('ReturnString: ${data.returnString}'),
+        //Text('ReturnInt: ${data.returnInt}'),
+        //Text('ReturnString: ${data.returnString}'),
         Expanded(
           child: ListView.builder(
             itemCount: data.returnJson1.length,

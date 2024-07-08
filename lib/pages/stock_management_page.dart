@@ -3,6 +3,7 @@ import 'package:delta/wcf/wcf_return_data.dart';
 import 'package:flutter/material.dart';
 
 import '../models/model.dart';
+import 'add_stock_page.dart';
 
 class StockManagementPage extends StatefulWidget {
   @override
@@ -21,8 +22,15 @@ class _StockManagementPageState extends State<StockManagementPage> {
   Future<ReturnData> fetchData() async {
     Map<String, Object?> dic = {};
     //dic['A_STK_ID'] = 'TEST1';
-    ReturnData result = await WcfController.postHttp('DBM1.GET_STK_ID', 1, dic);
+    ReturnData result =
+        await WcfController.postHttp('DBM2.GET_STK_LIST', 1, dic);
     return result;
+  }
+
+  void _refreshData() {
+    setState(() {
+      futureData = fetchData();
+    });
   }
 
   @override
@@ -30,6 +38,18 @@ class _StockManagementPageState extends State<StockManagementPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('창고관리'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () async {
+              final result = await Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddStockPage()));
+              if (result == true) {
+                _refreshData();
+              }
+            },
+          )
+        ],
       ),
       body: Center(
         child: FutureBuilder<ReturnData>(
@@ -61,8 +81,8 @@ class DataDisplay extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text('ReturnInt: ${data.returnInt}'),
-        Text('ReturnString: ${data.returnString}'),
+        //Text('ReturnInt: ${data.returnInt}'),
+        //Text('ReturnString: ${data.returnString}'),
         Expanded(
           child: ListView.builder(
             itemCount: data.returnJson1.length,
