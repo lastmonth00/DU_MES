@@ -71,11 +71,12 @@ class DataDisplay extends StatelessWidget {
               Map<String, Object?> item = data.returnJson1[index];
               String partNm = item['PART_NM']?.toString() ?? 'N/A';
               String stkId = item['STK_ID']?.toString() ?? 'N/A';
+              String qua_Sta = item['QUA_STA']?.toString() ?? 'N/A';
 
               return Card(
                 child: ListTile(
                   title: Text('품목명: $partNm'),
-                  subtitle: Text('창고명: $stkId'),
+                  subtitle: Text('창고명: $stkId \n수량: $qua_Sta'),
                 ),
               );
             },
