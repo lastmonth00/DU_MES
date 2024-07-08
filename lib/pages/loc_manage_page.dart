@@ -3,6 +3,7 @@ import 'package:delta/wcf/wcf_return_data.dart';
 import 'package:flutter/material.dart';
 
 import '../models/model.dart';
+import 'add_loc_page.dart';
 
 class LocManagementPage extends StatefulWidget {
   @override
@@ -18,12 +19,18 @@ class _LocManagementPageState extends State<LocManagementPage> {
     futureData = fetchData();
   }
 
+  void _refreshData() {
+    setState(() {
+      futureData = fetchData();
+    });
+  }
+
   Future<ReturnData> fetchData() async {
     Map<String, Object?> dic = {};
-    dic['A_PART_NO'] = '';
-    dic['A_STK_ID'] = 'TEST1';
+    // dic['A_PART_NO'] = '';
+    // dic['A_STK_ID'] = 'TEST1';
     ReturnData result =
-        await WcfController.postHttp('DBM2.GET_STK_STATUS', 1, dic);
+        await WcfController.postHttp('DBM1.GET_LOC_LIST', 1, dic);
     return result;
   }
 
@@ -32,6 +39,18 @@ class _LocManagementPageState extends State<LocManagementPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('품목관리'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () async {
+              final result = await Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddLocPage()));
+              if (result == true) {
+                _refreshData();
+              }
+            },
+          )
+        ],
       ),
       body: Center(
         child: FutureBuilder<ReturnData>(
@@ -70,12 +89,12 @@ class DataDisplay extends StatelessWidget {
             itemCount: data.returnJson1.length,
             itemBuilder: (context, index) {
               Map<String, Object?> item = data.returnJson1[index];
-              String stkNm = item['STK_NM']?.toString() ?? 'N/A';
+              String stkId = item['STK_ID']?.toString() ?? 'N/A';
               String stkLoc = item['STK_LOC_CD']?.toString() ?? 'N/A';
 
               return Card(
                 child: ListTile(
-                  title: Text('창고명: $stkNm'),
+                  title: Text('창고명: $stkId'),
                   subtitle: Text('위치명: $stkLoc'),
                 ),
               );

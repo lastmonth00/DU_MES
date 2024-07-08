@@ -22,7 +22,7 @@ class _ItemManagementPageState extends State<ItemManagementPage> {
     Map<String, Object?> dic = {};
     dic['A_STK_ID'] = 'TEST1';
     ReturnData result =
-        await WcfController.postHttp('DBM2.GET_ITEM_ID', 1, dic);
+        await WcfController.postHttp('DBM1.GET_ITEM_ID', 1, dic);
     return result;
   }
 

@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
-class AddStockPage extends StatefulWidget {
+class AddLocPage extends StatefulWidget {
   @override
-  _AddStockPageState createState() => _AddStockPageState();
+  _AddLocPageState createState() => _AddLocPageState();
 }
 
-class _AddStockPageState extends State<AddStockPage> {
+class _AddLocPageState extends State<AddLocPage> {
   final _formKey = GlobalKey<FormState>();
-  final _stkNmController = TextEditingController();
+  final _stkLocCdController = TextEditingController();
   final _stkIdController = TextEditingController();
 
   Future<void> _submitData() async {
     if (_formKey.currentState!.validate()) {
-      String stkNm = _stkNmController.text;
+      String stkLoccd = _stkLocCdController.text;
       String stkId = _stkIdController.text;
 
       // 데이터 서버로 전송
       try {
         Map<String, Object?> dic = {
-          'STK_NM': stkNm,
+          'STK_NM': stkLoccd,
           'STK_ID': stkId,
         };
 
         // 프로시저 호출을 위한 데이터 구성
         Map<String, dynamic> sendData = {
-          'procName': 'DBM1.ADD_STK',
+          'procName': 'DBM1.ADD_LOC',
           'overload': 1,
           'arguments': dic.keys.toList(),
           'values': dic.values.toList(),
@@ -51,13 +51,13 @@ class _AddStockPageState extends State<AddStockPage> {
         if (response.data["ReturnInt"] == 0) {
           // 성공적으로 추가되었음을 사용자에게 알림
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('창고가 성공적으로 추가되었습니다.')),
+            SnackBar(content: Text('위치가 성공적으로 추가되었습니다.')),
           );
           Navigator.pop(context); // 창고 추가 페이지 닫기
         } else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-                content: Text('창고 추가 실패: ${response.data["ReturnString"]}')),
+                content: Text('위치 추가 실패: ${response.data["ReturnString"]}')),
           );
         }
       } catch (e) {
@@ -72,7 +72,7 @@ class _AddStockPageState extends State<AddStockPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('창고 추가'),
+        title: Text('위치 추가'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -81,21 +81,21 @@ class _AddStockPageState extends State<AddStockPage> {
           child: Column(
             children: [
               TextFormField(
-                controller: _stkNmController,
-                decoration: InputDecoration(labelText: '창고명'),
+                controller: _stkLocCdController,
+                decoration: InputDecoration(labelText: '위치명'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return '창고명을 입력하세요';
+                    return '위치명을 입력하세요';
                   }
                   return null;
                 },
               ),
               TextFormField(
                 controller: _stkIdController,
-                decoration: InputDecoration(labelText: '창고코드'),
+                decoration: InputDecoration(labelText: '위치코드'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return '창고코드를 입력하세요';
+                    return '위치코드를 입력하세요';
                   }
                   return null;
                 },

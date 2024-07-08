@@ -23,7 +23,7 @@ class _StockManagementPageState extends State<StockManagementPage> {
     Map<String, Object?> dic = {};
     //dic['A_STK_ID'] = 'TEST1';
     ReturnData result =
-        await WcfController.postHttp('DBM2.GET_STK_LIST', 1, dic);
+        await WcfController.postHttp('DBM1.GET_STK_LIST', 1, dic);
     return result;
   }
 
@@ -89,12 +89,12 @@ class DataDisplay extends StatelessWidget {
             itemBuilder: (context, index) {
               Map<String, Object?> item = data.returnJson1[index];
               String stkId = item['STK_ID']?.toString() ?? 'N/A';
-              String partNo = item['PART_NO']?.toString() ?? 'N/A';
+              String stkNm = item['STK_NM']?.toString() ?? 'N/A';
 
               return Card(
                 child: ListTile(
-                  title: Text('창고명: $stkId'),
-                  subtitle: Text('창고코드: $partNo'),
+                  title: Text('창고명: $stkNm'),
+                  subtitle: Text('창고코드: $stkId'),
                 ),
               );
             },
