@@ -29,7 +29,7 @@ class _StockManagementPageState extends State<StockManagementPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Data Fetch Example'),
+        title: Text('창고관리'),
       ),
       body: Center(
         child: FutureBuilder<ReturnData>(
