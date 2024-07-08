@@ -8,18 +8,18 @@ class AddLocPage extends StatefulWidget {
 
 class _AddLocPageState extends State<AddLocPage> {
   final _formKey = GlobalKey<FormState>();
-  final _stkLocCdController = TextEditingController();
+  final _stkLoccdController = TextEditingController();
   final _stkIdController = TextEditingController();
 
   Future<void> _submitData() async {
     if (_formKey.currentState!.validate()) {
-      String stkLoccd = _stkLocCdController.text;
+      String stkLoccd = _stkLoccdController.text;
       String stkId = _stkIdController.text;
 
       // 데이터 서버로 전송
       try {
         Map<String, Object?> dic = {
-          'STK_NM': stkLoccd,
+          'STK_LOC_CD': stkLoccd,
           'STK_ID': stkId,
         };
 
@@ -81,7 +81,7 @@ class _AddLocPageState extends State<AddLocPage> {
           child: Column(
             children: [
               TextFormField(
-                controller: _stkLocCdController,
+                controller: _stkLoccdController,
                 decoration: InputDecoration(labelText: '위치명'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
