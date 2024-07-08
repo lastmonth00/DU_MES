@@ -1,3 +1,4 @@
+import 'package:delta/pages/item_management_page.dart';
 import 'package:flutter/material.dart';
 import '../widget/inventory_card.dart';
 import 'stock_management_page.dart';
@@ -21,7 +22,7 @@ class HomePage extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => TestPage()),
+                  MaterialPageRoute(builder: (context) => ItemManagementPage()),
                 );
               },
             ),
